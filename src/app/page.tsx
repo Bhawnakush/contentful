@@ -4,9 +4,14 @@ import Image from 'next/image';
 const url = `${process.env.BASE_URL}/spaces/${process.env.SPACE_ID}/environments/master/entries?access_token=${process.env.ACCESS_TOKEN}`;
 
 const options = {
-  renderText: (text: any) => {
-    return text.split('\n').reduce((children: any, textSegment: any, index: any) => {
-      return [...children, index > 0 && <br key={index} />, textSegment];
+  renderText: (text: string) => {
+    return text.split('\n').reduce((children: JSX.Element[], textSegment: string, index: number) => {
+      // Wrap textSegment in a React Fragment or span to ensure it's a JSX.Element
+      return [
+        ...children,
+        index > 0 && <br key={index} />,
+        <span key={index}>{textSegment}</span>, // Wrap the text in a span
+      ];
     }, []);
   },
   renderNode: {
