@@ -21,25 +21,27 @@ type BlogPost = {
     date: string;
     body: Document;
     image: Asset;
-    authorImage?: Asset | null; // authorImage can be nullable or undefined
+    authorImage?: Asset | null;
   };
 };
 
-export const revalidate = 60; // Revalidate every 60 seconds
+export const revalidate = 60;
 
 export default async function Home() {
   const url = `https://cdn.contentful.com/spaces/${process.env.SPACE_ID}/environments/master/entries?access_token=${process.env.ACCESS_TOKEN}`;
   const response = await fetch(url, { cache: "default" });
+
+  // Check if the response is valid and items exist
   const data = await response.json();
+  const items = data.items || []; // Default to an empty array if items is undefined
 
   return (
     <main className="max-w-4xl mx-auto p-6">
-      {data.items.map((post: BlogPost, index: number) => {
+      {items.map((post: BlogPost, index: number) => {
         const image = data.includes.Asset.find(
           (asset: Asset) => asset.sys.id === post.fields.image.sys.id
         );
 
-        // Check if authorImage exists before trying to access its properties
         const authorImage = post.fields.authorImage
           ? data.includes.Asset.find(
               (asset: Asset) => asset.sys.id === post.fields.authorImage?.sys.id
