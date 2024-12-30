@@ -25,29 +25,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`bg-gray-100 text-gray-900 ${geistSans.variable} ${geistMono.variable} antialiased font-sans`}>
-       <header className="bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white py-6 shadow-lg">
-  <div className="max-w-7xl mx-auto px-6 text-center">
-    {/* Header Title */}
-    <h1 className="text-4xl font-extrabold leading-tight mb-4">
-      My Blog
-    </h1>
+        className={`bg-gray-100 text-gray-900 ${geistSans.variable} ${geistMono.variable} antialiased font-sans`}
+      >
+        <header className="bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white py-6 shadow-lg">
+          <div className="max-w-7xl mx-auto px-6 text-center">
+            <h1 className="text-4xl font-extrabold leading-tight mb-4">My Blog</h1>
+            <p className="text-lg font-medium opacity-80 mb-6">
+              Thoughts, stories, and ideas from around the world
+            </p>
+          </div>
+        </header>
 
-    {/* Subtitle with a touch of lightness for readability */}
-    <p className="text-lg font-medium opacity-80 mb-6">
-      Thoughts, stories, and ideas from around the world
-    </p>
+        <main className="max-w-4xl mx-auto px-6 py-8">{children}</main>
 
-    {/* Optional: Add a call-to-action button */}
-    <div>
-    
-    </div>
-  </div>
-</header>
-
-        <main className="max-w-4xl mx-auto px-6 py-8">
-          {children}
-        </main>
         <footer className="bg-gray-800 text-white py-6 mt-12">
           <div className="max-w-7xl mx-auto text-center">
             <p className="text-sm">© 2024 My Blog. All rights reserved.</p>
